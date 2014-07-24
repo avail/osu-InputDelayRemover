@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Security.Principal;
 
 using Microsoft.Win32;
 using System.Diagnostics;
@@ -24,6 +25,7 @@ namespace osu_InputDelayRemover
             InitializeComponent();
             initialPopulation();
             openTheFile();
+
         }
 
         void initialPopulation()
@@ -49,7 +51,7 @@ namespace osu_InputDelayRemover
             }
             else
             {
-                Application.Exit();
+                Environment.Exit(1);
             }
         }
 
