@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace osu_InputDelayRemover
 {
@@ -50,7 +51,18 @@ namespace osu_InputDelayRemover
             {
                 Application.Exit();
             }
-        } 
+        }
+
+        void refreshRegistry()
+        {
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "Rundll32 apphelp.dll,ShimFlushCache";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
 
         void isRegistryHackedCheck(string file)
         {
@@ -83,11 +95,13 @@ namespace osu_InputDelayRemover
                 RegistryKey regkeyOpen = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers", true);
                 regkeyOpen.DeleteValue(file, true);
                 isRegistryHackedCheck(file);
+                refreshRegistry();
             }
             else
             {
                 Registry.SetValue(regPath, file, "NoDTToDITMouseBatch");
                 isRegistryHackedCheck(file);
+                refreshRegistry();
             }
         }
     }
