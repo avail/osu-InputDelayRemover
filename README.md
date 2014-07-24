@@ -1,0 +1,1 @@
+Just a registry hack that gets rid of most of the windowed-mode input delay in osu!
