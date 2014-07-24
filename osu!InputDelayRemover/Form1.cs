@@ -59,6 +59,7 @@ namespace osu_InputDelayRemover
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
+            startInfo.Verb = "runas";
             startInfo.Arguments = "Rundll32 apphelp.dll,ShimFlushCache";
             process.StartInfo = startInfo;
             process.Start();
